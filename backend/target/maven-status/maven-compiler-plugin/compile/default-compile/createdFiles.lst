@@ -1,0 +1,5 @@
+com\coll\config\DBconfig.class
+com\coll\model\Blog.class
+com\coll\model\BlogComment.class
+com\coll\model\UserDetail.class
+com\coll\model\Job.class
