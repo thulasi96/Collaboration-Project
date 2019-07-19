@@ -1,5 +1,7 @@
 package com.coll.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import org.hibernate.SessionFactory;
@@ -17,40 +19,7 @@ public class UserDAOimpl implements UserDetailDAO{
 
 	@Autowired
 	SessionFactory sessionFactory;
-	@Override
-	public boolean registerUser(UserDetail user) {
-		try
-		{
-			sessionFactory.getCurrentSession().save(user);
-			return true;
-		}
-		catch(Exception e)
-		{
-		return false;
-		}
-	}
 
-	@Override
-	public UserDetail getUserDetail(String username) {
-		Session session=sessionFactory.openSession();
-		UserDetail user=session.get(UserDetail.class,username);
-		session.close();
-		return user;
-	}
-
-	@Override
-	public UserDetail checkCredentail(UserDetail user) {
-		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from UserDetail where username=:uname and password=:passwd");
-		query.setParameter("uname", user.getUsername());
-		query.setParameter("passwd", user.getPassword());
-		UserDetail tempuser=(UserDetail)query.list().get(0);
-		
-		if(tempuser!=null)
-			return tempuser;
-		else
-		return null;
-	}
 
 	@Override
 	public boolean updateUser(UserDetail user) {
@@ -63,6 +32,46 @@ public class UserDAOimpl implements UserDetailDAO{
 		{
 		return false;
 		}
+	}
+
+	@Override
+	public List<UserDetail> getUsers() {
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from UserDetail");
+		List<UserDetail> listUsers=query.list();
+		return listUsers;
+	}
+
+	@Override
+	public boolean addUser(UserDetail userDetail) {
+		try {
+			sessionFactory.getCurrentSession().save(userDetail);
+			return true;
+		}
+		catch(Exception e) {
+		    return false;
+		}
+	}
+
+	@Override
+	public UserDetail getUser(String username) {
+		Session session=sessionFactory.openSession();
+	    UserDetail user=session.get(UserDetail.class,username);
+	    session.close();
+		return user;
+	}
+
+	@Override
+	public UserDetail checkUser(UserDetail userDetail) {
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from UserDetail where username=:uname and password=:pword");
+		query.setParameter("uname", userDetail.getUsername());
+		query.setParameter("pword",userDetail.getPassword());
+		List<UserDetail> listUsers=query.list();
+		if(listUsers!=null) {
+			return listUsers.get(0);
+		}
+		return null;
 	}
 
 	

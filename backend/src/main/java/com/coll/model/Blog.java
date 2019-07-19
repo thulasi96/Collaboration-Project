@@ -10,11 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-
-
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table
 
 public class Blog 
 {
@@ -25,6 +23,7 @@ public class Blog
 	String blogName;
 	String blogContent;
 	String username;
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
 	Date createDate;
 	String status;
 	int likes;

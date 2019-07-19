@@ -3,14 +3,19 @@ package com.coll.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import com.coll.model.Friend;
 import com.coll.model.UserDetail;
 
+@Repository("friendDAO")
+@Transactional
 public class FriendDAOimpl implements FriendDAO{
 
 	@Autowired
@@ -65,38 +70,38 @@ public class FriendDAOimpl implements FriendDAO{
 		}
 	}
 
-	@Override
-	public boolean deleteFriendRequest(int friendId) {
-		try
-		{
-			Session session=sessionFactory.openSession();
-			Friend friend=session.get(Friend.class, friendId);
-			session.close();
-			sessionFactory.getCurrentSession().delete(friend);
-			return true;
-		}
-		catch(Exception e)
-		{
-		return false;
-		}
-	}
 
 	@Override
-	public boolean acceptFriendRequest(int friendId) {
-		try
-		{
-			Session session=sessionFactory.openSession();
-			Friend friend=session.get(Friend.class, friendId);
-			session.close();
+	public boolean acceptFriendRequest(Friend friend) {
+		try {
 			friend.setStatus("A");
 			sessionFactory.getCurrentSession().update(friend);
 			return true;
 		}
-		catch(Exception e)
+		catch(Exception e) {
+			return false;
+		}
+	}
+
+	@Override
+	public Friend getFriend(int friendid) {
+		Session session=sessionFactory.openSession();
+		Friend friend=session.get(Friend.class,friendid);
+		session.close();
+		return friend;
+		
+	}
+
+	@Override
+	public boolean deleteFriendRequest(Friend friend) {
+		try {
+			sessionFactory.getCurrentSession().delete(friend);
+			return true;
+		}
+		catch(Exception e) 
 		{
-		return false;
+			return false;
 		}
 	}
 	
-
 }

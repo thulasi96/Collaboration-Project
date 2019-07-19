@@ -29,8 +29,8 @@ public class BlogdaoTest {
 	@Test
 	public void addblogtest() {
 		Blog blog=new Blog();
-		blog.setBlogName("Adv Java");
-		blog.setBlogContent("Java Advance Content");
+		blog.setBlogName("Basic Java");
+		blog.setBlogContent("OOPS Concepts");
 		blog.setCreateDate(new java.util.Date());
 		blog.setLikes(1);
 		blog.setDislikes(1);

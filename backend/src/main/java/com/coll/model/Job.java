@@ -9,9 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table
-@SequenceGenerator(name="jobidseq",sequenceName="jobid_seq")
+@SequenceGenerator(name="jobidseq",allocationSize=1,sequenceName="jobid_seq")
 public class Job 
 {
 	@Id
@@ -20,6 +22,7 @@ public class Job
 	String designation;
 	String description;
 	String companyName;
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
 	String location;
 	int ctc;
 	Date lastdateforApply;

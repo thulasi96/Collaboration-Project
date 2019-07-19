@@ -28,30 +28,30 @@ static UserDetailDAO userdetailDAO;
 	@Test
 	public void addusertest() {
 		UserDetail userDetail=new UserDetail();
-		userDetail.setUsername("im in");
-		userDetail.setPassword("immadmin");
-		userDetail.setEmailId("immadmin@gmail.com");
-		assertTrue("problem in adding user",userdetailDAO.registerUser(userDetail));
+		userDetail.setUsername("Thulsi");
+		userDetail.setPassword("12345");
+		userDetail.setEmailId("thulsi@gmail.com");
+		assertTrue("problem in adding user",userdetailDAO.addUser(userDetail));
 	}
 
 	@Ignore
 	@Test
 	public void getusertest() {
-		assertNotNull("problem in getting user",userdetailDAO.getUserDetail(""));
+		assertNotNull("problem in getting user",userdetailDAO.getUser(""));
 	}
 	@Ignore
 	@Test
 	public void updateusertest() {
-		UserDetail userDetail=userdetailDAO.getUserDetail("");
+		UserDetail userDetail=userdetailDAO.getUser("");
 		userDetail.setUsername("");
 		assertTrue("problem in updating user",userdetailDAO.updateUser(userDetail));
 	}
 	
-	
+	@Ignore
 	@Test
 	public void checkusertest() {
-		UserDetail userDetail=userdetailDAO.getUserDetail("");
+		UserDetail userDetail=userdetailDAO.getUser("");
 		System.out.println("username:"+userDetail.getUsername());
-		assertNotNull("problem in checking user",userdetailDAO.checkCredentail(userDetail));
+		assertNotNull("problem in checking user",userdetailDAO.checkUser(userDetail));
 	}
 }

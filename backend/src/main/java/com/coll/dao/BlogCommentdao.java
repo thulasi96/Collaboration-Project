@@ -5,9 +5,12 @@ import com.coll.model.BlogComment;
 
 public interface BlogCommentdao {
 
-	public boolean addComment(BlogComment blogComment);
-	public boolean deleteComment(BlogComment blogComment);
+	public boolean addBlogComment(BlogComment blogcomment);
+	public boolean updateBlogComment(BlogComment blogComment);
 	
-	public List<BlogComment>listBlogComments(int blogId);
-	public BlogComment getBlogComment(int blogCommentId);
+	public boolean deleteBlogComment(BlogComment blogcomment);
+	public BlogComment getBlogComment(int commentId);
+	
+	public List<BlogComment> getBlogComments();
+	public List<BlogComment> getBlogComments(int blogId);
 }

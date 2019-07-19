@@ -9,21 +9,22 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-@SequenceGenerator(name="friendidseq",sequenceName="Friendid_seq")
+
 public class Friend {
 
 	@Id
 	@GeneratedValue (strategy=GenerationType.SEQUENCE,generator="friendseq")
-	int jobId;
+	@SequenceGenerator(name="friendidseq",allocationSize=1,sequenceName="Friendid_seq")
+	int friendId;
 	
-	String username;
-	String friendusername;
-	String status;
-	public int getJobId() {
-		return jobId;
+	private String username;
+	private String friendusername;
+	private String status;
+	public int getFriendId() {
+		return friendId;
 	}
-	public void setJobId(int jobId) {
-		this.jobId = jobId;
+	public void setFriendId(int friendId) {
+		this.friendId = friendId;
 	}
 	public String getUsername() {
 		return username;
@@ -43,5 +44,5 @@ public class Friend {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
+
 }

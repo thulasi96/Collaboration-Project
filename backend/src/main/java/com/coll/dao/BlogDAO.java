@@ -13,6 +13,7 @@ public interface BlogDAO
 	public List<Blog>listBlogs();
 	public Blog getBlog(int blogId);
 	
+	
 	public boolean incrementLikes(int blogId);
 	public boolean incrementDislikes(int blogId);
 	

@@ -13,8 +13,12 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.coll.dao.BlogComDAOimpl;
+import com.coll.dao.BlogCommentdao;
 import com.coll.dao.BlogDAO;
 import com.coll.dao.BlogDAOimpl;
+import com.coll.dao.FriendDAO;
+import com.coll.dao.FriendDAOimpl;
 import com.coll.dao.UserDAOimpl;
 import com.coll.dao.UserDetailDAO;
 import com.coll.model.Blog;
@@ -75,5 +79,13 @@ public UserDetailDAO getUserDetailDAO() {
 @Bean(name="blogDAO") 
 public BlogDAO getBlogDAO() {
 	return new BlogDAOimpl();
+}
+@Bean(name="blogCommentDAO")
+public BlogCommentdao getBlogCommentdao() {
+	return new BlogComDAOimpl();
+}
+@Bean(name="friendDAO")
+public FriendDAO getFriendDAO() {
+	return new FriendDAOimpl();
 }
 }
