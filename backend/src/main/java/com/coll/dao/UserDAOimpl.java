@@ -21,7 +21,7 @@ public class UserDAOimpl implements UserDetailDAO{
 	SessionFactory sessionFactory;
 
 
-	@Override
+	
 	public boolean updateUser(UserDetail user) {
 		try
 		{
@@ -34,7 +34,7 @@ public class UserDAOimpl implements UserDetailDAO{
 		}
 	}
 
-	@Override
+
 	public List<UserDetail> getUsers() {
 		Session session=sessionFactory.openSession();
 		Query query=session.createQuery("from UserDetail");
@@ -42,7 +42,7 @@ public class UserDAOimpl implements UserDetailDAO{
 		return listUsers;
 	}
 
-	@Override
+	
 	public boolean addUser(UserDetail userDetail) {
 		try {
 			sessionFactory.getCurrentSession().save(userDetail);
@@ -53,7 +53,7 @@ public class UserDAOimpl implements UserDetailDAO{
 		}
 	}
 
-	@Override
+	
 	public UserDetail getUser(String username) {
 		Session session=sessionFactory.openSession();
 	    UserDetail user=session.get(UserDetail.class,username);
@@ -61,7 +61,7 @@ public class UserDAOimpl implements UserDetailDAO{
 		return user;
 	}
 
-	@Override
+	
 	public UserDetail checkUser(UserDetail userDetail) {
 		Session session=sessionFactory.openSession();
 		Query query=session.createQuery("from UserDetail where username=:uname and password=:pword");

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<br><br><br><br>
+<div class="container" ng-controller="BlogController">
+<link href="showblog.css" rel="stylesheet" id="style"></link>
+<div id="accordion" role="tablist">
+  <div class="card" ng-repeat="blog in blogdata">
+    <div class="card-header" role="tab" id="headingOne">
+      
+        <a data-toggle="collapse" href="/#{{blog.blogid}}" aria-expanded="true" aria-controls="collapseOne">{{blog.blogName}}</a>   
+</div>
+<div id="{{blog.blogid}}" class="collapse show" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        {{blog.blogContent}}&nbsp;&nbsp;&nbsp;&nbsp;    
+        <span ng-show="blog.status=='NA'">  
+      <img src="approve.png" width="20" height="20" ng-click="approve(blog.blogid)"/>&nbsp;&nbsp;&nbsp;&nbsp;
+      </span>
+      <span ng-show="blog.status=='A'">  
+      <img src="reject.png" width="20" height="20" ng-click="reject(blog.blogid)"/>
+      </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      
+      <a ng-click="deleteBlog(blog.blogid)" class="glyphicon glyphicon-trash">
+        </a>
+        
+      </div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

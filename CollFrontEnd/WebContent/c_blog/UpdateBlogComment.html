@@ -1,0 +1,8 @@
+<div ng-controller="BlogCommentController">
+<h2>Update Blog Comment page</h2>
+<form>
+CommentId:<input type="text" ng-model="blogcomment.commentId" value="{{blogcomment.commentId}}" readonly><br>
+blogComment:<input type="text" ng-model="blogcomment.blogComment" value="{{blogcomment.commentText}}"><br>
+<button ng-click="updateBlogComment()">Update</button>
+</form>
+</div>

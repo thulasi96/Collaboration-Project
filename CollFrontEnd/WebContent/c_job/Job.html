@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="login.css"/>
+</head>
+<body>
+<div class="container" ng-controller="JobController">
+    <div class="row mgTp">
+        <form class="col-md-6 offset-md-3">
+            <h3 class="title">Tell about You</h3>
+            <hr class="divisor">
+            <div class="form-group">
+                <label for="jobdesignation">Job Designation</label>
+                <input type="text" ng-model="job.jobDesignation" class="form-control" id="jobdesignation" placeholder="Enter job designation">
+            </div>
+            <div class="form-group">
+                <label for="Companyname">Company Name</label>
+                <input type="text" ng-model="job.companyName" class="form-control" id="Companyname" placeholder="Company name">
+            </div>
+             <div class="form-group">
+                <label for="CTC">CTC</label>
+                <input type="text" ng-model="job.ctc" class="form-control" id="CTC" placeholder="CTC">
+            </div>
+             <div class="form-group">
+                <label for="Joblocation">Job Location</label>
+                <input type="text" ng-model="job.jobLocation" class="form-control" id="Joblocation" placeholder="Job location">
+            </div>
+             <div class="form-group">
+                <label for="Lastdate">Last date</label>
+                <input type="date" ng-model="job.lastDate" class="form-control" id="Lastdate" placeholder="Last date">
+            </div>
+             <div class="form-group">
+                <label for="Skill">Skill</label>
+                <input type="text" ng-model="job.skills" class="form-control" id="Skill" placeholder="Skill">
+            </div>
+            
+            <button type="submit" ng-click="addJob()" class="btn btn-primary topBtn"><i class="fa fa-sign-in"></i>Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

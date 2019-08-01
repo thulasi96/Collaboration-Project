@@ -1,0 +1,43 @@
+<br><br><br><br><br><br><br>
+<link href="addBlog.css" rel="stylesheet" id="style">
+<div class="container" ng-controller="BlogController">
+  <div class="row">
+
+    <div class="main">
+
+      <h3>Update Blog</h3>
+      
+      <div class="login-or">
+        <hr class="hr-or">
+        <span class="span-or">**</span>
+      </div>
+
+      <form role="form">
+       <div class="form-group">
+          <label for="blogName">Blog Id</label>
+          <input type="text" ng-model="blog.blogid" class="form-control" id="blogid" required readonly>
+        </div>
+      
+        <div class="form-group">
+          <label for="blogName">Blog Name</label>
+          <input type="text" ng-model="blog.blogName" class="form-control" id="blogName" required>
+        </div>
+        <div class="form-group">
+          
+          <label for="blogContent">Blog Content</label>
+          <textarea cols="40" rows="5" ng-model="blog.blogContent" class="form-control" id="blogContent" required></textarea>
+        </div>
+        
+          
+          <button type="submit" ng-click="updateBlog()" class="btn btn btn-primary">
+          Update Blog
+        </button>
+        </div>
+        </form>
+      
+    
+    </div>
+    
+  </div>
+  
+</div>

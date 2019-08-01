@@ -16,57 +16,76 @@ import com.coll.dao.FriendDAO;
 import com.coll.model.Friend;
 import com.coll.model.UserDetail;
 
-
 @RestController
 public class FriendRestController {
-
+	
 	@Autowired
 	FriendDAO friendDAO;
 	
-	@GetMapping("/getFriend/{friendId}") 
-	public ResponseEntity<Friend> getFriend(@PathVariable("friendId") int friendId) 
-	{
-		Friend friend=friendDAO.getFriend(friendId);
-		return new ResponseEntity<Friend>(friend,HttpStatus.OK);
-	}
-	
-	@GetMapping("/showFriendList/{username}")
-	public ResponseEntity<List<Friend>> showFriendList(@PathVariable("username") String username) 
+	@GetMapping("/showAllFriends/{username}")
+	public ResponseEntity<List<Friend>> showAllFriends(@PathVariable("username")String username)
 	{
 		List<Friend> listFriends=friendDAO.showFriendList(username);
+		
 		if(listFriends.size()>0)
 		{
 			return new ResponseEntity<List<Friend>>(listFriends,HttpStatus.OK);
 		}
-		else {
-			return new ResponseEntity<List<Friend>>(listFriends,HttpStatus.NOT_FOUND);
+		else
+		{
+			return new ResponseEntity<List<Friend>>(listFriends,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	@GetMapping("/showPendingFriendList/{username}")
 	
-	@GetMapping("/showpendingFriendRequests/{username}")
-	public ResponseEntity<List<Friend>> showPendingFriendRequest(@PathVariable("username") String username) 
-	{
-		List<Friend> listFriends=friendDAO.showpendingFriendRequests(username);
-		if(listFriends.size()>0)
+		public ResponseEntity<List<Friend>> showPendingFriendList(@PathVariable("username")String username)
 		{
-			return new ResponseEntity<List<Friend>>(listFriends,HttpStatus.OK);
+		
+		List<Friend> friendList=friendDAO.showPendingFriendList(username);
+		
+		if(friendList.size()>0)
+		{
+			return new ResponseEntity<List<Friend>>(friendList,HttpStatus.OK);
 		}
-		else {
-			return new ResponseEntity<List<Friend>>(listFriends,HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<List<Friend>>(friendList,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	@GetMapping("/showSuggestedFriendList/{username}")
+	
+	public ResponseEntity<List<UserDetail>> showSuggestedFriendList(@PathVariable("username")String username)
+	{
+	
+	List<UserDetail> friendSuggestedList=friendDAO.showSuggestedFriend(username);
+	
+	if(friendSuggestedList.size()>0)
+	{
+		return new ResponseEntity<List<UserDetail>>(friendSuggestedList,HttpStatus.OK);
+	}
+	else
+		return new ResponseEntity<List<UserDetail>>(friendSuggestedList,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping("/showSuggestedFriends/{username}")
-	public ResponseEntity<List<UserDetail>> showSuggestedFriend(@PathVariable("username") String username) 
+	@GetMapping(value="/acceptFriendRequest/{friendId}",produces=MediaType.TEXT_PLAIN_VALUE)
+	
+	public ResponseEntity<String> acceptFriendRequest(@PathVariable("friendId")int friendId)
 	{
-		List<UserDetail> listFriends=friendDAO.showSuggestedFriends(username);
-		if(listFriends.size()>0)
+		if(friendDAO.acceptFriendRequest(friendId))
 		{
-			return new ResponseEntity<List<UserDetail>>(listFriends,HttpStatus.OK);
+			return new ResponseEntity<String>("Friend requested Accepted",HttpStatus.OK);
 		}
-		else {
-			return new ResponseEntity<List<UserDetail>>(listFriends,HttpStatus.NOT_FOUND);
+		else
+			return new ResponseEntity<String>("Failure",HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@GetMapping(value="/deleteFriendRequest/{friendId}",produces=MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> deleteFriendRequest(@PathVariable("friendId")int friendId)
+	{
+		if(friendDAO.deleteFriendRequest(friendId))
+		{
+			return new ResponseEntity<String>("Friend requested Deleted",HttpStatus.OK);
 		}
+		else
+			return new ResponseEntity<String>("Failure",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@PostMapping(value="/sendFriendRequest",produces=MediaType.TEXT_PLAIN_VALUE)
@@ -74,39 +93,10 @@ public class FriendRestController {
 	{
 		if(friendDAO.sendFriendRequest(friend))
 		{
-			return new ResponseEntity<String>("Friend added",HttpStatus.OK);
+			return new ResponseEntity<String>("Friend requested sent",HttpStatus.OK);
 		}
 		else
-		{
-			return new ResponseEntity<String>("Error adding friend",HttpStatus.NOT_FOUND);
-		}
+			return new ResponseEntity<String>("Failure",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping(value="/acceptFriendRequest/{friendId}",produces=MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> acceptFriendRequest(@PathVariable("friendId") int friendId)
-	{
-		Friend friend=friendDAO.getFriend(friendId);
-		if(friendDAO.acceptFriendRequest(friend)) 
-		{
-			return new ResponseEntity<String>("Friend accepted",HttpStatus.OK);
-		}
-		else 
-		{
-			return new ResponseEntity<String>("Error accepted friend",HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	@GetMapping(value="/deleteFriendRequest/{friendId}",produces=MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> deleteFriendRequest(@PathVariable("friendId") int friendId)
-	{
-		Friend friend=friendDAO.getFriend(friendId);
-		if(friendDAO.deleteFriendRequest(friend)) 
-		{
-			return new ResponseEntity<String>("Friend deleted",HttpStatus.OK);
-		}
-		else 
-		{
-			return new ResponseEntity<String>("Error deleting friend",HttpStatus.NOT_FOUND);
-		}
-	}
 }

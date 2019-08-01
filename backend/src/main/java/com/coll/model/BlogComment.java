@@ -1,7 +1,5 @@
 package com.coll.model;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -15,35 +13,35 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table
-
 public class BlogComment {
-
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="blogCommentseq")
-	@SequenceGenerator(name="blogCommentseq",allocationSize=1,sequenceName="blogcomid_seq")
-	int commentId;
-	String commentText;
-	String username;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="blogcomid")
+	@SequenceGenerator(name="blogcomid",allocationSize=1,sequenceName="blogcomid_seq")
+	private int commentId;
+	private int blogId;
+	private String blogComment;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
-	Date commentDate;
-	int blogId;
+	private Date commentDate;
+	private String username;
+	
+	
 	public int getCommentId() {
 		return commentId;
 	}
 	public void setCommentId(int commentId) {
 		this.commentId = commentId;
 	}
-	public String getCommentText() {
-		return commentText;
+	public int getBlogId() {
+		return blogId;
 	}
-	public void setCommentText(String commentText) {
-		this.commentText = commentText;
+	public void setBlogId(int blogId) {
+		this.blogId = blogId;
 	}
-	public String getUsername() {
-		return username;
+	public String getBlogComment() {
+		return blogComment;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setBlogComment(String blogComment) {
+		this.blogComment = blogComment;
 	}
 	public Date getCommentDate() {
 		return commentDate;
@@ -51,10 +49,10 @@ public class BlogComment {
 	public void setCommentDate(Date commentDate) {
 		this.commentDate = commentDate;
 	}
-	public int getBlogId() {
-		return blogId;
+	public String getUsername() {
+		return username;
 	}
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }

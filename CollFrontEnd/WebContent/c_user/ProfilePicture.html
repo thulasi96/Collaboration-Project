@@ -1,0 +1,29 @@
+<div class="container" ng-controller="UserController">
+	<div class="row">
+		<div class="main">
+			<h3> <a href="#/register">Profile picture </a>
+			</h3>
+			<div class="login-or">
+				<hr class="hr-or">
+				<span class="span-or"></span>
+			</div>
+			<script>
+function myFunction() {
+  action="http://localhost:8080/CollMiddleware/doUpload";
+  
+}
+</script>
+			<form method="post" role="form" href="#/profile" action="http://localhost:8080/CollMiddleware/doUpload" enctype="multipart/form-data">
+				<div class="form-group">
+					<label for="inputUsernameEmail"> Picture</label>
+					<input type="file" class="file" name="file" required>					
+				</div>
+				<input type="submit" class="btn btn btn-primary" value="Upload"/>
+				
+				
+			</form>
+			
+
+		</div>
+	</div>
+</div>

@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title></title>
+<link rel="stylesheet" href="Register.css"/>
 </head>
 <body>
-<h2>Register Page</h2>
+<div class="container" ng-controller="UserController">
+    <div class="row mgTp">
+	 <form class="col-md-6 offset-md-3">
+            <h3 class="title">Sign up</h3>
+            <hr class="divisor">
+             <div class="form-group">
+                <label for="username">User name</label>
+                <input type="text"  class="form-control" ng-model="userDetail.username" id="username" aria-describedby="NameHelp" placeholder="Full name">
+             </div>
+             <div class="form-group">
+                <label for="first_name">First name</label>
+                <input type="text"  class="form-control" ng-model="userDetail.firstname" id="first_name" aria-describedby="NameHelp" placeholder="First name">
+             </div>
+             <div class="form-group">
+                <label for="last_name">Last name</label>
+                <input type="text"  class="form-control" ng-model="userDetail.lastname" id="last_name" aria-describedby="NameHelp" placeholder="Last name">
+             </div>
+             <div class="form-group">
+    	      <label for="email">Email</label>
+                <input type="email" class="form-control" ng-model="userDetail.email" id="email" aria-describedby="NameHelp" placeholder="Email address">
+             </div> 
+      
+     
+    <div class="form-group">
+		<label for="password">Password</label>
+        <input class="form-control" ng-model="userDetail.password" placeholder="Create password" type="password" id="password">
+    </div> 
+                                         
+    <div class="form-group">
+        <button type="submit" ng-click="register()" class="btn btn-primary btn-block"> Create Account  </button>
+    </div>   
+    <p class="text-center">Have an account? <a href="#/login">Log In</a> </p>                                                                 
+</form>
+
+</div>
+
+</div> 
 </body>
 </html>

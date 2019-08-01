@@ -6,12 +6,11 @@ import com.coll.model.Friend;
 import com.coll.model.UserDetail;
 
 public interface FriendDAO {
-	public Friend getFriend(int friendid);
-	public List<Friend> showpendingFriendRequests(String username);
 	public List<Friend> showFriendList(String username);
-	public List<UserDetail> showSuggestedFriends(String username);
+	public List<Friend> showPendingFriendList(String username);
+	public List<UserDetail> showSuggestedFriend(String username);
 	
 	public boolean sendFriendRequest(Friend friend);
-	public boolean deleteFriendRequest(Friend friend);
-	public boolean acceptFriendRequest(Friend friend);
+	public boolean acceptFriendRequest(int friendId);
+	public boolean deleteFriendRequest(int friendId);
 }

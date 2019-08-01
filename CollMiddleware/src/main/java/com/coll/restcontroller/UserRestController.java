@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,61 +22,70 @@ import com.coll.model.UserDetail;
 
 @RestController
 public class UserRestController {
-
 	@Autowired
-	UserDetailDAO userDetailDAO;
+	UserDetailDAO userdetailDAO;
 	
-	@GetMapping("/getUsers")
-	public ResponseEntity<List<UserDetail>> getUsers() 
+	@GetMapping("/showAllUser")
+	public ResponseEntity<List<UserDetail>> showAllUser()
 	{
-		List<UserDetail> listUsers=userDetailDAO.getUsers();
-		if(listUsers.size()>0) {
-			return new ResponseEntity<List<UserDetail>>(listUsers,HttpStatus.OK);
+		List<UserDetail> listUserDetail=userdetailDAO.getUsers();
+		
+		if(listUserDetail.size()>0)
+		{
+			return new ResponseEntity<List<UserDetail>>(listUserDetail,HttpStatus.OK);
 		}
-		else {
-			return new ResponseEntity<List<UserDetail>>(listUsers,HttpStatus.INTERNAL_SERVER_ERROR);
+		else
+		{
+			return new ResponseEntity<List<UserDetail>>(listUserDetail,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@GetMapping("/getUser/{username}")
-	public ResponseEntity<UserDetail> getUser(@PathVariable("username") String username)
+
+	public ResponseEntity<UserDetail> getBlog(@PathVariable("username")String username)
 	{
-		UserDetail userDetail=userDetailDAO.getUser(username);
-		return new ResponseEntity<UserDetail>(userDetail,HttpStatus.OK);
+	UserDetail user=(UserDetail)userdetailDAO.getUser(username);
+	
+	return new ResponseEntity<UserDetail>(user,HttpStatus.OK);
 	}
 	
-	@PostMapping(value="/addUser",produces=MediaType.TEXT_PLAIN_VALUE) 
+	@PostMapping(value="/registerUser",produces=MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> addUser(@RequestBody UserDetail userDetail)
 	{
-		if(userDetailDAO.addUser(userDetail)) {
-			return new ResponseEntity<String>("User added",HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<String>("User not added",HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		if(userdetailDAO.addUser(userDetail))
+			return new ResponseEntity<String>("User Added",HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Failure",HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	@PostMapping("/checkUser")
-	public ResponseEntity<UserDetail> checkUser(@RequestBody UserDetail userDetail,HttpSession session)
+	
+	@PostMapping("/checkuser")
+	public ResponseEntity<UserDetail> checkLogin(@RequestBody UserDetail user,HttpSession session)
 	{
-		UserDetail userDetail1=userDetailDAO.checkUser(userDetail);
-		if(userDetail1!=null)
+		UserDetail user1=userdetailDAO.checkUser(user);
+		
+		if(user1!=null)
 		{
-			session.setAttribute("userDetail",userDetail1);
-			return new ResponseEntity<UserDetail>(userDetail1,HttpStatus.OK);
+			session.setAttribute("userDetail", user1);
+			return new ResponseEntity<UserDetail>(user1,HttpStatus.OK);
 		}
-		else 
-		{
-			return new ResponseEntity<UserDetail>(userDetail1,HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		else
+			return new ResponseEntity<UserDetail>(user1,HttpStatus.INTERNAL_SERVER_ERROR);
+		
 	}
-	@PostMapping("/updateUser")
+	
+	@PatchMapping(value="/updateUser",produces=MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> updateUser(@RequestBody UserDetail userDetail)
 	{
-		if(userDetailDAO.updateUser(userDetail)) {
-			return new ResponseEntity<String>("User updated",HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<String>("User not updated",HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+		UserDetail user1=userdetailDAO.getUser(userDetail.getUsername());
+		user1.setRole(user1.getRole());
+		user1.setStatus(user1.getStatus());
+		user1.setIsOnline(user1.getIsOnline());
+		
+		
+		if(userdetailDAO.updateUser(userDetail))
+			return new ResponseEntity<String>("User Updated",HttpStatus.OK);
+		else
+			return new ResponseEntity<String>("Failure",HttpStatus.INTERNAL_SERVER_ERROR);	
 	}
+
 }

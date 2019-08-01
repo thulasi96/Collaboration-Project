@@ -2,17 +2,91 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title></title>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
-<script src="RouteConfig.js"></script>
-</head>
-<body ng-app="myApp">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
-<a href="#login">Login</a>
-<a href="#register">Register</a>
-<a href="#aboutus">AboutUs</a>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.1/sockjs.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+
+
+<script src="RouteConfig.js"></script>
+<script src="c_user/UserController.js"></script>
+<script src="c_chat/ChatController.js"></script>
+<script src="c_chat/ChatService.js"></script>
+<script src="c_blog/BlogController.js"></script>
+<script src="c_blog/BlogCommentController.js"></script>
+<script src="c_forum/ForumController.js"></script>
+<script src="c_forum/ForumCommentController.js"></script>
+<script src="c_friend/FriendController.js"></script>
+<script src="c_job/JobController.js"></script>
+
+<!-- Bootstrap CDN here -->
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta charset="utf-8">
+<link rel="stylesheet" href="index.css"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+  <!-- End of bootstrap CDN -->
+  
+<body ng-app="myApp">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      
+      <li><a href="#/profile" ng-hide="currentUser==undefined" >Profile</a></li>
+      <li><a href="#/chat" ng-hide="currentUser==undefined" >Chat</a></li>
+    
+    
+	<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Blog <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#/addBlog" ng-show="currentUser.role=='ROLE_USER'">Add Blog</a></li>
+          <li><a href="#/showBlog">Show Blog</a></li>
+          <li><a href="#/manageBlog" ng-show="currentUser.role=='ROLE_ADMIN'">Manage Blog</a></li>
+        </ul>
+    </li>
+    
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Forum <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#/addForum" ng-show="currentUser.role=='ROLE_USER'">Add Forum</a></li>
+          <li><a href="#/showForum">Show Forum</a></li>
+            <li><a href="#/manageForum" ng-show="currentUser.role=='ROLE_ADMIN'">Manage Form</a></li>
+        </ul>
+    </li>
+    
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Job <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          
+          <li><a href="#/showJob" ng-show="currentUser.role=='ROLE_USER'"> Job </a></li>
+          <li><a href="#/job" ng-show="currentUser.role=='ROLE_ADMIN'">Manage Job </a></li>
+        </ul>
+        
+        <li><a href="#/login" ng-show="currentUser==undefined" >Login</a></li>
+      <li><a href="#/register" ng-show="currentUser==undefined" >Register</a></li>
+      <li><a href="#/aboutus" ng-show="currentUser==undefined" >Aboutus</a></li>
+      
+ 
+    
+
+	<li id="mynav" ng-hide="currentUser==undefined">
+	<img src="http://localhost:8080/middleware/getImage/{{currentUser.username}}" width="20px" height="20px">
+	<h4 style="right:10px">Welcome {{currentUser.firstname}}</h4>
+	<a href="" ng-click="logout()" >Logout</a>
+	</li>
+   
+   
+  </ul>
+  </div>
+</nav>
+
 <div ng-view></div>
 </body>
 </html>

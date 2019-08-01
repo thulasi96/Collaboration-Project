@@ -1,7 +1,4 @@
 package com.coll.model;
-
-
-
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,29 +7,34 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity
 
-public class Blog 
-{
+
+@Entity
+@Table
+public class Blog {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="blogidseq")
-	@SequenceGenerator(name="blogidseq",allocationSize=1,sequenceName="bloggid_seq")
-	int blogId;
-	String blogName;
-	String blogContent;
-	String username;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="blogid")
+	@SequenceGenerator(name="blogid",allocationSize=1,sequenceName="blogid_seq")
+	private int blogid;
+	private String blogName;
+	private String blogContent;
+	private String username;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
-	Date createDate;
-	String status;
-	int likes;
-	int dislikes;
-	public int getBlogId() {
-		return blogId;
+	private Date createDate;
+	private String status;
+	private int likes;
+	private int dislikes;
+	
+	
+	public int getBlogid() {
+		return blogid;
 	}
-	public void setBlogId(int blogId) {
-		this.blogId = blogId;
+
+	public void setBlogid(int blogid) {
+		this.blogid = blogid;
 	}
 	public String getBlogName() {
 		return blogName;
@@ -76,5 +78,5 @@ public class Blog
 	public void setDislikes(int dislikes) {
 		this.dislikes = dislikes;
 	}
-	
+
 }

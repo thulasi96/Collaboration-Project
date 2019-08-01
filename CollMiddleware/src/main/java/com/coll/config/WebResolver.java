@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("com.coll.*")
+@ComponentScan("com.coll")
 public class WebResolver {
 	
 	@Bean

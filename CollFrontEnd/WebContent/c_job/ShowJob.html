@@ -1,0 +1,30 @@
+<br/><br/><br/><br/>
+<link href="job.css" rel="stylesheet" id="style"></link>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<div class="container" ng-controller="JobController">
+<div class="row-fluid" ng-repeat="job in jobdata"> 
+      <div class="col-sm-6">
+          <div class="panel panel-default">
+          <div class="panel-heading">
+            
+            <h3 class="panel-title" itemprop="name">{{job.companyName}}<br/>{{job.jobDesignation}}</h3>
+            
+      <a ng-show="currentUser.role=='ROLE_ADMIN'" ng-click="deleteJob(job.jobId)">
+          <span class="glyphicon glyphicon-trash"></span>
+        </a>
+        
+        <a ng-show="currentUser.role=='ROLE_USER'" ng-click="applyJob(applyjob.applyId)">apply</a>
+          </div><!--/panel-heading-->
+          <div class="panel-body" itemprop="reviewBody">
+                      <h5>{{job.skills}}
+                      Last Date To Apply:-{{job.lastDate}}
+                      </h5>						                                    
+                      <small>{{job.jobLocation}}</small>
+                      <p><small>{{job.ctc}}</small></p>
+          </div><!--/panel-body-->
+                 
+      </div><!--/panel-->
+      </div><!--/col-sm-6-->
+  </div>
+</div>

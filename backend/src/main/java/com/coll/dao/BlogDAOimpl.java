@@ -13,125 +13,123 @@ import com.coll.model.Blog;
 
 @Repository("blogDAO")
 @Transactional
-public class BlogDAOimpl implements BlogDAO
-{
+public class BlogDAOimpl implements BlogDAO {
 	@Autowired
 	SessionFactory sessionFactory;
 
-	@Override
 	public boolean addBlog(Blog blog) {
-		try
-		{
+
+		try {
 			sessionFactory.getCurrentSession().save(blog);
 			return true;
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 		return false;
 		}
 	}
 
-	@Override
-	public boolean deleteBlog(Blog blog) {
-		try
-		{
-			sessionFactory.getCurrentSession().delete(blog);
-			return true;
-		}
-		catch(Exception e)
-		{
-		return false;
-		}
-	}
-
-	@Override
 	public boolean updateBlog(Blog blog) {
-		try
-		{
+		
+		try {
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
 		}
-		catch(Exception e)
-		{
+		catch(Exception e) {
 		return false;
 		}
 	}
 
-	@Override
-	public List<Blog> listBlogs() {
-		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Blog");
-		List<Blog>listBlogs=query.list();
-		session.close();
-		return listBlogs;
+	public boolean deleteBlog(Blog blog) {
+
+		try {
+			sessionFactory.getCurrentSession().delete(blog);
+			return true;
+		}
+		catch(Exception e) {
+		return false;
+		}
 	}
 
-	@Override
 	public Blog getBlog(int blogId) {
 		Session session=sessionFactory.openSession();
-		Blog blog=session.get(Blog.class, blogId);
+		Blog blog=session.get(Blog.class,blogId);
 		session.close();
 		return blog;
 	}
 
-	@Override
+	public List<Blog> getBlogs() {
+		Session session=sessionFactory.openSession();
+		Query query=session.createQuery("from Blog");
+		List<Blog> listBlogs=query.list();
+		return listBlogs;
+	}
+
 	public boolean incrementLikes(int blogId) {
-		try
-		{
-			Blog blog=this.getBlog(blogId);
+		
+		try {
+			Blog blog=getBlog(blogId);
 			blog.setLikes(blog.getLikes()+1);
+			blog.setDislikes(blog.getDislikes()-1);
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
 		}
-		catch(Exception e)
-		{
-		return false;
+		catch(Exception e) {
+			return false;
 		}
 	}
 
-	@Override
 	public boolean incrementDislikes(int blogId) {
-		try
-		{
-			Blog blog=this.getBlog(blogId);
+		
+		try {
+			Blog blog=getBlog(blogId);
 			blog.setDislikes(blog.getDislikes()+1);
+			blog.setLikes(blog.getLikes()-1);
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
 		}
-		catch(Exception e)
-		{
-		return false;
+		catch(Exception e) {
+			return false;
 		}
 	}
 
-	@Override
+	public boolean rejectBlog(int blogId) {
+		
+		try {
+			Blog blog=getBlog(blogId);
+			blog.setStatus("NA");
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+
+	}
+
 	public boolean approveBlog(Blog blog) {
 		try
 		{
 			blog.setStatus("A");
-			sessionFactory.getCurrentSession().save(blog);
-			return true;
-		}
-		catch(Exception e)
-		{
-		return false;
-		}
-	}
-
-	@Override
-	public boolean rejectBlog(Blog blog) {
-		try
-		{
-			blog.setStatus("P");
 			sessionFactory.getCurrentSession().update(blog);
 			return true;
 		}
 		catch(Exception e)
 		{
-		return false;
+			return false;	
 		}
 	}
 
+	public boolean rejectBlog(Blog blog) {
+		try
+		{
+			blog.setStatus("NA");
+			sessionFactory.getCurrentSession().update(blog);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;	
+		}
+	}
 	
-
 }
