@@ -131,7 +131,7 @@ myApp.controller("ForumController",function($scope,$location,$rootScope,$http)
 	{
 		console.log('I am in show comment');
 		$rootScope.forumId=forumId;
-		$location.path("/showForumComment");
+		$location.path("/forumComment");
 	}
 	getForum();
 	

@@ -1,6 +1,6 @@
 myApp.controller("FriendController",function($scope,$location,$rootScope,$http)
 {
-	$scope.friend={friendId:0, username:'', friendusername:'', friendFirstName:'', friendLastName:'', status:''};
+	$scope.friend={friendId:0, username:'', friendName:'', status:''};
 	 $scope.showFriends;
 	    $scope.friendRequests;
 	    $scope.suggestedFriends;

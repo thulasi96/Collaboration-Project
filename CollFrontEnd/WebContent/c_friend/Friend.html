@@ -1,15 +1,53 @@
-<div ng-controller="FriendController">
-<div ng-repeat="friend in friendRequests">
-<div ng-show="currentUser.username==friend.username">
-<img src="http://localhost:8080/CollMiddleware/getImage/{{friend.friendusername}}" width="50px" height="50px">
-{{friend.friendFirstName}} {{friend.friendLastName}}
-<button ng-click="deleteRequest(friend.friendId)">Cancel</button>
+
+<br><br><br><br><br>
+<div class="container" ng-controller="FriendController">
+	<div class="row">
+		<div class="main">
+				
+		</div>
+	</div>
+
+<div class="row text-center text-lg-left">Friends
+	<div ng-repeat="friend in showFriends" >
+		<div ng-show="friend.username==currentUser.username">
+			
+			<p>
+			<span class="glyphicon glyphicon-user">
+			<strong>{{friend.friendName}}</strong>
+			<input type="button" value="Unfriend" ng-click="unfriend(friend.friendId)">
+			</p>
+		</div>
+		</div>
+		
 </div>
-<div ng-show="currentUser.username==friend.friendusername">
-<img src="http://localhost:8080/CollMiddleware/getImage/{{friend.username}}" width="50px" height="50px">
-{{friend.userFirstName}} {{friend.userLastName}}
-<button ng-click="acceptRequest(friend.friendId)">Accept</button>
-<button ng-click="deleteRequest(friend.friendId)">Decline</button>
+<br><br><br><br><br>
+<div class="row text-center text-lg-left">Pending Friends
+		<div ng-repeat="friend in friendRequests" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+		<div ng-show="friend.friendusername==currentUser.username">
+			
+			<p>
+			<span class="glyphicon glyphicon-user">
+			<strong>{{friend.username}}</strong>
+			<input type="button" value="Accept" ng-click="acceptRequest(friend.friendId)">
+			<input type="button" value="Decline" ng-click="unfriend(friend.friendId)">
+			</p>
+		</div>
+	</div>
+</div>
+<br><br><br><br><br>
+<div class="row text-center text-lg-left">suggestedFriends
+	<div ng-repeat="friend in suggestedFriends" class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+		<div>
+			
+			<p>
+			<span class="glyphicon glyphicon-user">
+			<strong>{{friend.username}}</strong>
+			<input type="button" value="AddFriend" ng-click="sendRequest(friend.username)">
+			
+			</p>
+		</div>
+	</div>
 </div>
 </div>
+
 </div>

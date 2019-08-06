@@ -15,6 +15,7 @@ myApp.config(function($routeProvider){
 					    .when("/showBlog",{templateUrl:"c_blog/ShowBlog.html"})
 					    .when("/updateBlog",{templateUrl:"c_blog/UpdateBlog.html"})
 					    .when("/myBlog",{templateUrl:"c_blog/MyBlog.html"})
+					    .when("/blogcom",{templateUrl:"c_blog/BlogComment.html"})
 	
 					    .when("/addForum",{templateUrl:"c_forum/AddForum.html"})
 					    .when("/manageForum",{templateUrl:"c_forum/ManageForum.html"})
@@ -25,10 +26,10 @@ myApp.config(function($routeProvider){
 					    .when("/forumComment",{templateUrl:"c_forum/ForumComment.html"})
 					    .when("/updateForumComment",{templateUrl:"c_forum/UpdateForumComment.html"})
 					    
-					    .when("/addJob",{templateUrl:"c_job/Job.html"})
-					    .when("/showJob",{templateUrl:"c_job/ShowJob.html"})
+					    .when("/showJob",{templateUrl:"c_job/Job.html"})
+					    .when("/job",{templateUrl:"c_job/ShowJob.html"})
 					    
-					    .when("/showFriends",{templateUrl:"c_friend/Friend.html"})
+					    .when("/friend",{templateUrl:"c_friend/Friend.html"})
 					    
 					    
 					    

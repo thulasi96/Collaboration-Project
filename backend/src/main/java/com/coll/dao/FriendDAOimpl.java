@@ -33,9 +33,11 @@ public class FriendDAOimpl implements FriendDAO{
 
 	public List<Friend> showPendingFriendList(String username) {
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Friend where friendname=:uname and status='P'");
+		Query query=session.createQuery("from Friend where(username=:uname or friendname=:fname) and status='P'");
 		query.setParameter("uname", username);
-		List<Friend> friendList=query.list();
+		query.setParameter("fname", username);
+		List<Friend> friendList=(List<Friend>)query.list();
+		session.close();
 		return friendList;
 	}
 

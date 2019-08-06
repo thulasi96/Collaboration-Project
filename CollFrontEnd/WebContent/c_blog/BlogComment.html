@@ -15,7 +15,7 @@
                     
           {{blog.blogContent}}
         </h3>
-         <img src="likeicon.png" width="20" height="20" ng-click="incrementLikes(blog.blogid)"/>{{blog.likes}}&nbsp;&nbsp;&nbsp;&nbsp;
+         <a ng-click="incrementLikes(blog.blogid)"/>{{blog.likes}}&nbsp;&nbsp;&nbsp;&nbsp;
       <img src="dislikesicon.png" width="20" height="20" ng-click="incrementDisLikes(blog.blogid)"/>{{blog.dislikes}}
        <span ng-show="blog.username==currentUser.username">
       <a ng-click="deleteBlog(blog.blogid)">

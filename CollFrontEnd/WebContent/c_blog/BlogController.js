@@ -142,7 +142,7 @@ myApp.controller("BlogController",function($scope,$location,$rootScope,$http)
 	{
 		console.log('I am in show comment');
 		$rootScope.blogid=blogid;
-		$location.path("/showBlogComment");
+		$location.path("/blogcom");
 	}
 	getBlog();
 	

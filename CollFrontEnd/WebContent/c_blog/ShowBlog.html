@@ -4,7 +4,7 @@
 <div class="container">
 <div id="accordion">
     <div class="card" ng-repeat="blog in blogdata">
-      <div class="card-header" ng-show="blog.status=='A'">
+      <div class="p-3 mb-2 bg-warning text-dark" ng-show="blog.status=='A'">
         <a class="card-link" data-toggle="collapse" href="/#{{blog.blogid}}">
           {{blog.blogName}}
         </a>
@@ -15,8 +15,8 @@
         </div>
       </div>
     &nbsp;&nbsp;&nbsp;&nbsp;      
-      <img src="likeicon.png" width="40" height="40" ng-click="incrementLikes(blog.blogid)"/>{{blog.likes}}&nbsp;&nbsp;&nbsp;&nbsp;
-      <img src="dislikesicon.png" width="40" height="40" ng-click="incrementDisLikes(blog.blogid)"/>{{blog.dislikes}}
+      <a  class="glyphicon glyphicon-thumbs-up" width="40" height="40" ng-click="incrementLikes(blog.blogid)"/>{{blog.likes}}&nbsp;&nbsp;&nbsp;&nbsp;
+      <a  class="glyphicon glyphicon-thumbs-down" width="40" height="40" ng-click="incrementDisLikes(blog.blogid)"/>{{blog.dislikes}}
       
       &nbsp;&nbsp;&nbsp;&nbsp;
       <span ng-show="blog.username==currentUser.username">
@@ -29,7 +29,7 @@
       <a ng-click="editBlog(blog.blogid)">
           <span class="glyphicon glyphicon-edit"></span>
         </a>
-        
+        &nbsp;&nbsp;&nbsp;&nbsp;
         </span>
          <a ng-click="showComment(blog.blogid)">
           <span class="glyphicon glyphicon-comment"></span>
