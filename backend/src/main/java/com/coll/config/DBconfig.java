@@ -36,7 +36,7 @@ import com.coll.model.UserDetail;
 public class DBconfig 
 {
 	@Bean(name="datasource")
-	public DataSource getoracleDataSource()
+	public DataSource getH2DataSource()
 	{
 		DriverManagerDataSource datasource=new DriverManagerDataSource();
 		
@@ -57,7 +57,7 @@ public class DBconfig
 		hibernateprop.put("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
 		
 		hibernateprop.setProperty("showsql", "true");
-		LocalSessionFactoryBuilder factory=new LocalSessionFactoryBuilder(getoracleDataSource());
+		LocalSessionFactoryBuilder factory=new LocalSessionFactoryBuilder(getH2DataSource());
 		factory.addProperties(hibernateprop);
 		factory.addAnnotatedClass(Blog.class);
 		factory.addAnnotatedClass(UserDetail.class);

@@ -6,22 +6,33 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-
 public class UserDetail {
-
 	@Id
-	String username;
-	String password;
-	String name;
-	String emailId;
-	String mobileno;
-	String address;
-	String role;
+	private String username;
+	private String firstname;
+	private String lastname;
+	private String password;
+	private String emailId;
+	private String role="ROLE_USER";
+	private String status;
+	private String isOnline;
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	public String getPassword() {
 		return password;
@@ -29,29 +40,11 @@ public class UserDetail {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
 	public String getEmailId() {
 		return emailId;
 	}
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
-	}
-	public String getMobileno() {
-		return mobileno;
-	}
-	public void setMobileno(String mobileno) {
-		this.mobileno = mobileno;
-	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
 	}
 	public String getRole() {
 		return role;
@@ -59,5 +52,18 @@ public class UserDetail {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getIsOnline() {
+		return isOnline;
+	}
+	public void setIsOnline(String isOnline) {
+		this.isOnline = isOnline;
+	}
 	
+
 }

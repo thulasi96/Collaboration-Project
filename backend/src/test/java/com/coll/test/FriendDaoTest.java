@@ -2,9 +2,7 @@ package com.coll.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -15,7 +13,6 @@ import com.coll.model.Friend;
 import com.coll.model.UserDetail;
 
 public class FriendDaoTest {
-
 static FriendDAO friendDAO;
 	
 	@BeforeClass
@@ -26,51 +23,55 @@ static FriendDAO friendDAO;
 		friendDAO=(FriendDAO)context.getBean("friendDAO");
 	}
 	
+	
 	@Test
-	public void sendfriendrequesttest() {
+	public void sendFriendRequestTest()
+	{
 		Friend friend=new Friend();
-		friend.setFriendusername("thulsi");
-		friend.setUsername("imman");
-		friend.setStatus("NA");
-		assertTrue("problem in adding friend",friendDAO.sendFriendRequest(friend));
+		
+		friend.setUsername("Thulsi");
+		friend.setFriendName("Saravana");
+		
+		assertTrue("problem in sending Friend Request",friendDAO.sendFriendRequest(friend));
 	}
 	@Ignore
 	@Test
-	public void getfriendtest() {
-		assertNotNull("problem in getting user",friendDAO.getFriend(0));
+	public void acceptFriendRequest()
+	{
+		assertTrue("Problem in Accepting Friend Request",friendDAO.acceptFriendRequest(29));
 	}
+	
 	@Ignore
 	@Test
-	public void acceptfriendrequesttest() {
-		Friend friend=friendDAO.getFriend(521);
-		assertTrue("problem in adding friend",friendDAO.acceptFriendRequest(friend));
-	}
-    @Ignore
-	@Test
-	public void deletefriendrequesttest() {
-		Friend friend=friendDAO.getFriend(523);
-		assertTrue("problem in adding friend",friendDAO.deleteFriendRequest(friend));
-	}
-    @Ignore
-	@Test
-	public void showfriendlisttest() {
-		List<Friend> listFriends=friendDAO.showFriendList("immadmin");
-		for(Friend friend:listFriends) {
-			System.out.println("username:"+friend.getFriendusername());
+	public void showFriendListTest()
+	{
+		List<Friend> friendList=friendDAO.showFriendList("Saravana");
+		assertTrue("Problem in showing Friend Request:",friendList.size()>0);
+		
+		for(Friend friend:friendList)
+		{
+			System.out.println(friend.getUsername()+":");
+			System.out.println(friend.getFriendName());
 		}
 	}
+	
 	@Ignore
 	@Test
-	public void showpendingfriendrequesttest() {
-		List<Friend> listFriends=friendDAO.showpendingFriendRequests("immadmin");
-		for(Friend friend:listFriends) {
-			System.out.println("username:"+friend.getFriendusername());
+	public void ShowPendingFriendListTest() 
+	{
+		List<Friend> pendingFriendList=friendDAO.showPendingFriendList("Saravana");
+		assertTrue("Problem in showing pending Friend List",pendingFriendList.size()>0);
+		
+		for(Friend friend:pendingFriendList)
+		{
+			System.out.println(friend.getUsername());
 		}
 	}
+	
 	@Ignore
 	@Test
 	public void showsuggestedfriendstest() {
-		List<UserDetail> listUsers=friendDAO.showSuggestedFriends("immadmin");
+		List<UserDetail> listUsers=friendDAO.showSuggestedFriend("Saravana");
 		for(UserDetail userDetail:listUsers) {
 			System.out.println("username:"+userDetail.getUsername());
 		}

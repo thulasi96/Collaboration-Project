@@ -19,10 +19,10 @@
         {{forum.forumContent}}&nbsp;&nbsp;&nbsp;&nbsp;    
         
         <span ng-show="forum.status=='NA'">  
-      <img src="approve.png" width="20" height="20" ng-click="approve(forum.forumId)"/>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a class="glyphicon glyphicon-ok" width="20" height="20" ng-click="approve(forum.forumId)"/>&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
       <span ng-show="forum.status=='A'">  
-      <img src="reject.png" width="20" height="20" ng-click="reject(forum.forumId)"/>
+      <a class="glyphicon glyphicon-remove" width="20" height="20" ng-click="reject(forum.forumId)"/>
       </span>
       &nbsp;&nbsp;&nbsp;&nbsp;
       

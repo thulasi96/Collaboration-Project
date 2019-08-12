@@ -14,35 +14,30 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table
 @SequenceGenerator(name="jobidseq",allocationSize=1,sequenceName="jobid_seq")
-public class Job 
-{
+
+public class Job {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="jobidseq")
-	int jobId;
-	String designation;
-	String description;
-	String companyName;
-	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy")
-	String location;
-	int ctc;
-	Date lastdateforApply;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,generator="jobId")
+	@SequenceGenerator(name="jobId",allocationSize=1,sequenceName="jobIdseq")
+	private int jobId;
+	private String jobDesignation;
+	private String companyName;
+	private int CTC;
+	private String jobLocation;
+	private Date lastDate;
+	private String skills;
+	
 	public int getJobId() {
 		return jobId;
 	}
 	public void setJobId(int jobId) {
 		this.jobId = jobId;
 	}
-	public String getDesignation() {
-		return designation;
+	public String getJobDesignation() {
+		return jobDesignation;
 	}
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+	public void setJobDesignation(String jobDesignation) {
+		this.jobDesignation = jobDesignation;
 	}
 	public String getCompanyName() {
 		return companyName;
@@ -50,22 +45,28 @@ public class Job
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-	public String getLocation() {
-		return location;
+	public int getCTC() {
+		return CTC;
 	}
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCTC(int cTC) {
+		CTC = cTC;
 	}
-	public int getCtc() {
-		return ctc;
+	public String getJobLocation() {
+		return jobLocation;
 	}
-	public void setCtc(int ctc) {
-		this.ctc = ctc;
+	public void setJobLocation(String jobLocation) {
+		this.jobLocation = jobLocation;
 	}
-	public Date getLastdateforApply() {
-		return lastdateforApply;
+	public Date getLastDate() {
+		return lastDate;
 	}
-	public void setLastdateforApply(Date lastdateforApply) {
-		this.lastdateforApply = lastdateforApply;
+	public void setLastDate(Date lastDate) {
+		this.lastDate = lastDate;
+	}
+	public String getSkills() {
+		return skills;
+	}
+	public void setSkills(String skills) {
+		this.skills = skills;
 	}
 }

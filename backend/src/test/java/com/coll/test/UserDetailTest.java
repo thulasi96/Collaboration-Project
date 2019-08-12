@@ -11,11 +11,9 @@ import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import com.coll.dao.UserDetailDAO;
 import com.coll.model.UserDetail;
-
 public class UserDetailTest {
+	static UserDetailDAO userdetailDAO;
 
-static UserDetailDAO userdetailDAO;
-	
 	@BeforeClass
 	public static void executefirst() {
 		AnnotationConfigApplicationContext context=new AnnotationConfigApplicationContext();
@@ -26,32 +24,44 @@ static UserDetailDAO userdetailDAO;
 	
 	
 	@Test
-	public void addusertest() {
-		UserDetail userDetail=new UserDetail();
-		userDetail.setUsername("Thulsi");
-		userDetail.setPassword("12345");
-		userDetail.setEmailId("thulsi@gmail.com");
-		assertTrue("problem in adding user",userdetailDAO.addUser(userDetail));
-	}
-
-	@Ignore
-	@Test
-	public void getusertest() {
-		assertNotNull("problem in getting user",userdetailDAO.getUser(""));
-	}
-	@Ignore
-	@Test
-	public void updateusertest() {
-		UserDetail userDetail=userdetailDAO.getUser("");
-		userDetail.setUsername("");
-		assertTrue("problem in updating user",userdetailDAO.updateUser(userDetail));
+	public void addusertest() 
+	{
+		UserDetail user=new UserDetail();
+		user.setUsername("Suriya");
+		user.setFirstname("saravana");
+		user.setLastname("siva");
+		user.setPassword("suriya7");
+		user.setEmailId("suriya@gmail.com");
+		
+		assertTrue("problem in adding user",userdetailDAO.addUser(user));
 	}
 	
 	@Ignore
 	@Test
-	public void checkusertest() {
-		UserDetail userDetail=userdetailDAO.getUser("");
-		System.out.println("username:"+userDetail.getUsername());
-		assertNotNull("problem in checking user",userdetailDAO.checkUser(userDetail));
+	public void getusertest() {
+		assertNotNull("problem in getting user",userdetailDAO.getUser("saravana"));
 	}
+	@Ignore
+	@Test
+	public void updateusertest() {
+		UserDetail user=userdetailDAO.getUser("saran");
+		user.setRole("ROLE_ADMIN");
+		assertTrue("problem in updating user",userdetailDAO.updateUser(user));
+	}
+	@Ignore
+	@Test
+	public void listusertest() {
+		List<UserDetail> listUsers=userdetailDAO.getUsers();
+		for(UserDetail user:listUsers) {
+			System.out.println("username:"+user.getUsername());
+		}
+	}
+	@Ignore
+	@Test
+	public void checkusertest() {
+		UserDetail user=userdetailDAO.getUser("Saravana");
+		System.out.println("User has been checked");
+		assertNotNull("problem in checking user",userdetailDAO.checkUser(user));
+	}
+
 }

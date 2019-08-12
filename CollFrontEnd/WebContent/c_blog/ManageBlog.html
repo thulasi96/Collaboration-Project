@@ -18,10 +18,10 @@
       <div class="card-body">
         {{blog.blogContent}}&nbsp;&nbsp;&nbsp;&nbsp;    
         <span ng-show="blog.status=='NA'">  
-      <img src="approve.png" width="20" height="20" ng-click="approve(blog.blogid)"/>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a class="glyphicon glyphicon-ok" width="20" height="20" ng-click="approve(blog.blogid)"/>&nbsp;&nbsp;&nbsp;&nbsp;
       </span>
       <span ng-show="blog.status=='A'">  
-      <img src="reject.png" width="20" height="20" ng-click="reject(blog.blogid)"/>
+      <a class="glyphicon glyphicon-remove" width="20" height="20" ng-click="reject(blog.blogid)"/>
       </span>
       &nbsp;&nbsp;&nbsp;&nbsp;
       
